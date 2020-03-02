@@ -1,0 +1,124 @@
+package Controllers;
+
+import Commons.ReadWriteCSV;
+import Models.House;
+import Models.Room;
+import Models.Villa;
+import Validation.InputValidation;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class ServiceController {
+    private Scanner scanner;
+    private ReadWriteCSV readWriteCSV;
+    private InputValidation inputValidation;
+    private List<Villa> villas;
+    private List<House> houses;
+    private List<Room> rooms;
+
+    public ServiceController() {
+        readWriteCSV = new ReadWriteCSV();
+        inputValidation = new InputValidation();
+        villas = readWriteCSV.readFileVillaCSV();
+        houses = readWriteCSV.readFileHouseCSV();
+        rooms = readWriteCSV.readFileRoomCSV();
+    }
+
+    public void addListVillaService() {
+        scanner = new Scanner(System.in);
+        System.out.println("Enter number list villa you want: ");
+        int length = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < length; i++) {
+            Villa villa = new Villa();
+            villa.setId(UUID.randomUUID().toString().replace("-", ""));
+            villa.setServiceName(inputValidation.getValidNameService());
+            villa.setUsableArea(inputValidation.getValidUsableArea());
+            villa.setRentalCosts(inputValidation.getValidRentalCosts());
+            villa.setMaxNumberOfPeople(inputValidation.getValidNumberOfPeople());
+            villa.setTypeOfRent(inputValidation.getValidTypeOfRent());
+            villa.setRoomStandard(inputValidation.getValidRoomStandard());
+            System.out.print("Enter convenient description: ");
+            villa.setDescriptionOfAmenities(scanner.nextLine());
+            villa.setAreaOfPool(inputValidation.getValidPoolArea());
+            villa.setNumberOfFloors(inputValidation.getNumberOfFloors());
+            System.out.println("------------------------------------------------");
+            villas.add(villa);
+        }
+        readWriteCSV.writeVillaToCSVFile(villas);
+    }
+    public void addListHouseService() {
+        scanner = new Scanner(System.in);
+        System.out.println("Enter number list villa you want: ");
+        int length = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < length; i++) {
+            House house = new House();
+            house.setId(UUID.randomUUID().toString().replace("-", ""));
+            house.setServiceName(inputValidation.getValidNameService());
+            house.setUsableArea(inputValidation.getValidUsableArea());
+            house.setRentalCosts(inputValidation.getValidRentalCosts());
+            house.setMaxNumberOfPeople(inputValidation.getValidNumberOfPeople());
+            house.setTypeOfRent(inputValidation.getValidTypeOfRent());
+            house.setRoomStandard(inputValidation.getValidRoomStandard());
+            System.out.print("Enter convenient description: ");
+            house.setDescriptionOfAmenities(scanner.nextLine());
+            house.setNumberOfFloors(inputValidation.getNumberOfFloors());
+            System.out.println("------------------------------------------------");
+            houses.add(house);
+        }
+        readWriteCSV.writeHouseToCSVFile(houses);
+    }
+    public void addListRoomService() {
+        scanner = new Scanner(System.in);
+        System.out.println("Enter number list villa you want: ");
+        int length = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < length; i++) {
+            Room room = new Room();
+            room.setId(UUID.randomUUID().toString().replace("-", ""));
+            room.setServiceName(inputValidation.getValidNameService());
+            room.setUsableArea(inputValidation.getValidUsableArea());
+            room.setRentalCosts(inputValidation.getValidRentalCosts());
+            room.setMaxNumberOfPeople(inputValidation.getValidNumberOfPeople());
+            room.setTypeOfRent(inputValidation.getValidTypeOfRent());
+            System.out.println("Enter the service accompany: ");
+            room.setFreeServiceAccompany(scanner.nextLine());
+            System.out.println("------------------------------------------------");
+            rooms.add(room);
+        }
+        readWriteCSV.writeRoomToCSVFile(rooms);
+    }
+
+    public void showVillaService() {
+        for (Villa villa : villas) {
+            System.out.println("--------------------------------------------------");
+            System.out.println(villa.showInfo());
+        }
+    }
+
+    public void showHouseService() {
+        for (House house : houses) {
+            System.out.println("--------------------------------------------------");
+            System.out.println(house.showInfo());
+        }
+    }
+
+    public void showRoomService() {
+        for (Room room : rooms) {
+            System.out.println("--------------------------------------------------");
+            System.out.println(room.showInfo());
+        }
+    }
+
+    public void showAllNameVillaNotDuplicate() {
+    }
+
+    public void showAllNameHouseNotDuplicate() {
+    }
+
+    public void showAllNameRoomNotDuplicate() {
+    }
+}
