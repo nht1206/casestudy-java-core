@@ -3,7 +3,7 @@ package Validation;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class InputValidation {
+public class InputServiceValidation {
     private String regex = "";
     private Scanner scanner;
     public String getValidNameService() {

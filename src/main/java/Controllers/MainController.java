@@ -4,7 +4,14 @@ import Views.Menu;
 
 public class MainController {
     private Menu menu = new Menu();
-    private ServiceController serviceController = new ServiceController();
+    private ServiceController serviceController;
+    private CustomerController customerController;
+
+    public MainController() {
+        serviceController = new ServiceController();
+        customerController = new CustomerController();
+    }
+
     public void displayMainMenu() {
         int choice = menu.mainMenu();
         switch (choice) {
@@ -17,11 +24,13 @@ public class MainController {
                 break;
             }
             case 3: {
-                addNewCustomers();
+                customerController.addNewCustomers();
+                displayMainMenu();
                 break;
             }
             case 4: {
-                showInfoCustomer();
+                customerController.showInfoCustomer();
+                displayMainMenu();
                 break;
             }
             case 5: {
@@ -85,11 +94,6 @@ public class MainController {
         }
     }
 
-    private void addNewCustomers() {
-    }
-
-    private void showInfoCustomer() {
-    }
 
     private void addNewBooking() {
     }

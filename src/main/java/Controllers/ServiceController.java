@@ -4,7 +4,7 @@ import Commons.ReadWriteCSV;
 import Models.House;
 import Models.Room;
 import Models.Villa;
-import Validation.InputValidation;
+import Validation.InputServiceValidation;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,14 +13,14 @@ import java.util.UUID;
 public class ServiceController {
     private Scanner scanner;
     private ReadWriteCSV readWriteCSV;
-    private InputValidation inputValidation;
+    private InputServiceValidation inputValidation;
     private List<Villa> villas;
     private List<House> houses;
     private List<Room> rooms;
 
     public ServiceController() {
         readWriteCSV = new ReadWriteCSV();
-        inputValidation = new InputValidation();
+        inputValidation = new InputServiceValidation();
         villas = readWriteCSV.readFileVillaCSV();
         houses = readWriteCSV.readFileHouseCSV();
         rooms = readWriteCSV.readFileRoomCSV();
@@ -33,7 +33,7 @@ public class ServiceController {
         scanner.nextLine();
         for (int i = 0; i < length; i++) {
             Villa villa = new Villa();
-            villa.setId(UUID.randomUUID().toString().replace("-", ""));
+            villa.setId(getRandomUUID());
             villa.setServiceName(inputValidation.getValidNameService());
             villa.setUsableArea(inputValidation.getValidUsableArea());
             villa.setRentalCosts(inputValidation.getValidRentalCosts());
@@ -49,6 +49,11 @@ public class ServiceController {
         }
         readWriteCSV.writeVillaToCSVFile(villas);
     }
+
+    private String getRandomUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
     public void addListHouseService() {
         scanner = new Scanner(System.in);
         System.out.println("Enter number list villa you want: ");
@@ -56,7 +61,7 @@ public class ServiceController {
         scanner.nextLine();
         for (int i = 0; i < length; i++) {
             House house = new House();
-            house.setId(UUID.randomUUID().toString().replace("-", ""));
+            house.setId(getRandomUUID());
             house.setServiceName(inputValidation.getValidNameService());
             house.setUsableArea(inputValidation.getValidUsableArea());
             house.setRentalCosts(inputValidation.getValidRentalCosts());
@@ -78,7 +83,7 @@ public class ServiceController {
         scanner.nextLine();
         for (int i = 0; i < length; i++) {
             Room room = new Room();
-            room.setId(UUID.randomUUID().toString().replace("-", ""));
+            room.setId(getRandomUUID());
             room.setServiceName(inputValidation.getValidNameService());
             room.setUsableArea(inputValidation.getValidUsableArea());
             room.setRentalCosts(inputValidation.getValidRentalCosts());

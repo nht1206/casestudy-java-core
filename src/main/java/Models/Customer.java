@@ -1,6 +1,6 @@
 package Models;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
     private String id;
     private String nameCustomer;
     private String idCard;
@@ -124,7 +124,7 @@ public class Customer {
         this.service = service;
     }
 
-    public int getYearBirthday() {
+    public int getYearOfBirth() {
         String temp = "";
         for (int i = birthday.length() - 4; i < birthday.length(); i++) {
             temp += birthday.charAt(i);
@@ -158,5 +158,12 @@ public class Customer {
                 ", address='" + address + '\'' +
                 ", service=" + service +
                 '}';
+    }
+
+    public int compareTo(Customer o) {
+        if (nameCustomer.compareTo(o.getNameCustomer()) == 0){
+            return getYearOfBirth() - o.getYearOfBirth();
+        }
+        return nameCustomer.compareTo(o.getNameCustomer());
     }
 }
