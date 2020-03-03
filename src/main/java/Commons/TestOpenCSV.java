@@ -11,7 +11,7 @@ public class TestOpenCSV {
     public static void main(String[] args) {
         //Test write villa
         ReadWriteCSV readWriteCSV = new ReadWriteCSV();
-        List<Villa> listVillas = new ArrayList<Villa>();
+        List<Villa> listVillas = new ArrayList<>();
         Villa villa1 = new Villa("a1", "b1", 23.3, 646546.0, 3, "c1", "d1", "e1", 54.0, 3);
         listVillas.add(villa1);
         Villa villa2 = new Villa("a2", "b2", 24.3, 746546.0, 4, "c2", "d2", "e2", 64.0, 4);
@@ -22,7 +22,7 @@ public class TestOpenCSV {
         listVillas.add(villa4);
         readWriteCSV.writeVillaToCSVFile(listVillas);
         //Test write House
-        List<House> listHouses = new ArrayList<House>();
+        List<House> listHouses = new ArrayList<>();
         House house1 = new House("a1", "b1", 23.3, 646546.0, 3, "c1", "d1", "e1", 3);
         listHouses.add(house1);
         House house2 = new House("a2", "b2", 24.3, 746546.0, 4, "c2", "d2", "e2", 4);
@@ -33,7 +33,7 @@ public class TestOpenCSV {
         listHouses.add(house4);
         readWriteCSV.writeHouseToCSVFile(listHouses);
         //Test write room
-        List<Room> listRooms = new ArrayList<Room>();
+        List<Room> listRooms = new ArrayList<>();
         Room room1 = new Room("a1", "b1", 23.3, 646546.0, 3, "c1", "d1");
         listRooms.add(room1);
         Room room2 = new Room("a2", "b2", 24.3, 746546.0, 4, "c2", "d2");

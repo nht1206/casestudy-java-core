@@ -70,11 +70,12 @@ public class ReadWriteCSV {
             }
         }
     }
+
     public void writeHouseToCSVFile(List<House> listHouses) {
         try {
             writer = new CSVWriter(new FileWriter(PATH_FILE_HOUSE), COMMA_DELIMITER, DEFAULT_QUOTE, NEW_LINE_SEPARATOR);
             writer.writeNext(FILE_HEADER_OF_HOUSE);
-            List<String[]> allData = new ArrayList<String[]>();
+            List<String[]> allData = new ArrayList<>();
             for (House house : listHouses) {
                 String[] data = new String[]{
                         house.getId() + "",
@@ -104,11 +105,12 @@ public class ReadWriteCSV {
             }
         }
     }
+
     public void writeRoomToCSVFile(List<Room> listRooms) {
         try {
             writer = new CSVWriter(new FileWriter(PATH_FILE_ROOM), COMMA_DELIMITER, DEFAULT_QUOTE, NEW_LINE_SEPARATOR);
             writer.writeNext(FILE_HEADER_OF_ROOM);
-            List<String[]> allData = new ArrayList<String[]>();
+            List<String[]> allData = new ArrayList<>();
             for (Room room : listRooms) {
                 String[] data = new String[]{
                         room.getId() + "",
@@ -141,7 +143,7 @@ public class ReadWriteCSV {
         try {
             writer = new CSVWriter(new FileWriter(PATH_FILE_CUSTOMER), COMMA_DELIMITER, DEFAULT_QUOTE, NEW_LINE_SEPARATOR);
             writer.writeNext(FILE_HEADER_OF_CUSTOMER);
-            List<String[]> allData = new ArrayList<String[]>();
+            List<String[]> allData = new ArrayList<>();
             for (Customer customer : listCustomers) {
                 String[] data = new String[]{
                         customer.getId(),
@@ -171,12 +173,13 @@ public class ReadWriteCSV {
             }
         }
     }
+
     public List<Villa> readFileVillaCSV() {
-        Map<String, String> mapping = new HashMap<String, String>();
+        Map<String, String> mapping = new HashMap<>();
         for (String s : FILE_HEADER_OF_VILLA) {
             mapping.put(s, s);
         }
-        HeaderColumnNameTranslateMappingStrategy<Villa> strategy = new HeaderColumnNameTranslateMappingStrategy<Villa>();
+        HeaderColumnNameTranslateMappingStrategy<Villa> strategy = new HeaderColumnNameTranslateMappingStrategy<>();
         strategy.setType(Villa.class);
         strategy.setColumnMapping(mapping);
         CsvToBean<Villa> csvToBean = null;
@@ -192,14 +195,16 @@ public class ReadWriteCSV {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        assert csvToBean != null;
         return csvToBean.parse();
     }
+
     public List<House> readFileHouseCSV() {
-        Map<String, String> mapping = new HashMap<String, String>();
+        Map<String, String> mapping = new HashMap<>();
         for (String s : FILE_HEADER_OF_HOUSE) {
             mapping.put(s, s);
         }
-        HeaderColumnNameTranslateMappingStrategy<House> strategy = new HeaderColumnNameTranslateMappingStrategy<House>();
+        HeaderColumnNameTranslateMappingStrategy<House> strategy = new HeaderColumnNameTranslateMappingStrategy<>();
         strategy.setType(House.class);
         strategy.setColumnMapping(mapping);
         CsvToBean<House> csvToBean = null;
@@ -215,14 +220,16 @@ public class ReadWriteCSV {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        assert csvToBean != null;
         return csvToBean.parse();
     }
+
     public List<Room> readFileRoomCSV() {
-        Map<String, String> mapping = new HashMap<String, String>();
+        Map<String, String> mapping = new HashMap<>();
         for (String s : FILE_HEADER_OF_ROOM) {
             mapping.put(s, s);
         }
-        HeaderColumnNameTranslateMappingStrategy<Room> strategy = new HeaderColumnNameTranslateMappingStrategy<Room>();
+        HeaderColumnNameTranslateMappingStrategy<Room> strategy = new HeaderColumnNameTranslateMappingStrategy<>();
         strategy.setType(Room.class);
         strategy.setColumnMapping(mapping);
         CsvToBean<Room> csvToBean = null;
@@ -238,14 +245,16 @@ public class ReadWriteCSV {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        assert csvToBean != null;
         return csvToBean.parse();
     }
+
     public List<Customer> readFileCustomerCSV() {
-        Map<String, String> mapping = new HashMap<String, String>();
+        Map<String, String> mapping = new HashMap<>();
         for (String s : FILE_HEADER_OF_ROOM) {
             mapping.put(s, s);
         }
-        HeaderColumnNameTranslateMappingStrategy<Customer> strategy = new HeaderColumnNameTranslateMappingStrategy<Customer>();
+        HeaderColumnNameTranslateMappingStrategy<Customer> strategy = new HeaderColumnNameTranslateMappingStrategy<>();
         strategy.setType(Customer.class);
         strategy.setColumnMapping(mapping);
         CsvToBean<Customer> csvToBean = null;
@@ -261,6 +270,7 @@ public class ReadWriteCSV {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        assert csvToBean != null;
         return csvToBean.parse();
     }
 }

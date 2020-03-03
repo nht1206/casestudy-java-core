@@ -136,11 +136,11 @@ public class InputServiceValidation {
             LocalDate date = LocalDate.now();
 
             if (birthday.matches(regex)) {
-                String temp = "";
+                StringBuilder temp = new StringBuilder();
                 for (int i = birthday.length() - 4; i < birthday.length(); i++) {
-                    temp += birthday.charAt(i);
+                    temp.append(birthday.charAt(i));
                 }
-                if (date.getYear() - new Integer(temp) >= 18) {
+                if (date.getYear() - new Integer(temp.toString()) >= 18) {
                     return birthday;
                 } else {
                     System.out.println("Your age must be more then 18: ");

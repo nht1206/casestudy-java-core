@@ -65,7 +65,7 @@ public class MainController {
             }
             case 3: {
                 serviceController.showRoomService();
-                showServices();;
+                showServices();
                 break;
             }
             case 4: {

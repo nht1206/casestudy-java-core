@@ -9,7 +9,6 @@ import Validation.InputCustomerValidation;
 import java.util.*;
 
 public class CustomerController {
-    private Scanner scanner;
     private ReadWriteCSV readWriteCSV;
     List<Customer> customers;
     private InputCustomerValidation inputCustomerValidation;
@@ -20,8 +19,9 @@ public class CustomerController {
         inputCustomerValidation = new InputCustomerValidation();
         customers = readWriteCSV.readFileCustomerCSV();
     }
+
     public void addNewCustomers() {
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter number list customer you want: ");
         int length = scanner.nextInt();
         scanner.nextLine();
@@ -40,7 +40,7 @@ public class CustomerController {
                 try {
                     customer.setIdCard(inputCustomerValidation.getValidIdCard());
                     break;
-                } catch ( IdCardException e) {
+                } catch (IdCardException e) {
                     System.out.println(e.getMessage());
                 }
             }
