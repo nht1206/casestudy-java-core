@@ -15,20 +15,6 @@ public class Customer implements Comparable<Customer> {
     public Customer() {
     }
 
-    public Customer(String id, String nameCustomer, String idCard, String birthday, String gender, String phoneNumber, String email, String typeCustomer, String address, Service service) {
-        this.id = id;
-        this.nameCustomer = nameCustomer;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.typeCustomer = typeCustomer;
-        this.address = address;
-        this.service = service;
-        this.idCard = idCard;
-    }
-
-
 
     public Customer(String id, String nameCustomer, String idCard, String birthday, String gender, String phoneNumber, String email, String typeCustomer, String address) {
         this.id = id;

@@ -3,8 +3,14 @@ package Views;
 import java.util.Scanner;
 
 public class Menu {
-    Scanner scanner = new Scanner(System.in);
-    public int mainMenu() {
+    Scanner scanner;
+
+    public Menu() {
+        this.scanner = new Scanner(System.in);
+
+    }
+
+    public int displayMainMenu() {
         int choice;
         System.out.println("1. Add New Services\n" +
                 "2. Show Services\n" +
@@ -17,7 +23,7 @@ public class Menu {
         choice = scanner.nextInt();
         return choice;
     }
-    public int addingServiceMenu() {
+    public int displayAddingServiceMenu() {
         int choice;
         System.out.println("1. Add New Villa\n" +
                 "2. Add New House\n" +
@@ -28,8 +34,7 @@ public class Menu {
         choice = scanner.nextInt();
         return choice;
     }
-    public int showingServiceMenu() {
-        scanner = new Scanner(System.in);
+    public int displayShowingServiceMenu() {
         int choice;
         System.out.println("1. Show All Villa\n" +
                 "2. Show All House\n" +
@@ -39,6 +44,15 @@ public class Menu {
                 "6. Show All Name Room Not Duplicate\n" +
                 "7. Back to menu\n" +
                 "8. Exit");
+        System.out.print("Enter your choice: ");
+        choice = scanner.nextInt();
+        return choice;
+    }
+    public int displayBookingMenu() {
+        int choice;
+        System.out.println("1. Booking Villa\n" +
+                "2. Booking House\n" +
+                "3. Booking Room\n");
         System.out.print("Enter your choice: ");
         choice = scanner.nextInt();
         return choice;

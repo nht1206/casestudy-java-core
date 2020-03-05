@@ -86,4 +86,8 @@ public class CustomerController {
             System.out.println(customer.showInfo());
         }
     }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
 }

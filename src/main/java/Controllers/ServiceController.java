@@ -126,4 +126,16 @@ public class ServiceController {
 
     public void showAllNameRoomNotDuplicate() {
     }
+
+    public List<Villa> getVillas() {
+        return villas;
+    }
+
+    public List<House> getHouses() {
+        return houses;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
 }
