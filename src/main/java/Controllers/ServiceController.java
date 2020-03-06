@@ -6,9 +6,7 @@ import Models.Room;
 import Models.Villa;
 import Validation.InputServiceValidation;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class ServiceController {
     private Scanner scanner;
@@ -119,12 +117,27 @@ public class ServiceController {
     }
 
     public void showAllNameVillaNotDuplicate() {
+        Set<Villa> villaTreeSet = new TreeSet<>(villas);
+        for (Villa villa : villaTreeSet) {
+            System.out.println("--------------------------------------------------");
+            System.out.println(villa.getServiceName());
+        }
     }
 
     public void showAllNameHouseNotDuplicate() {
+        Set<House> houseTreeSet = new TreeSet<>(houses);
+        for (House house : houseTreeSet) {
+            System.out.println("--------------------------------------------------");
+            System.out.println(house.getServiceName());
+        }
     }
 
     public void showAllNameRoomNotDuplicate() {
+        Set<Room> roomTreeSet = new TreeSet<>(rooms);
+        for (Room room : roomTreeSet) {
+            System.out.println("--------------------------------------------------");
+            System.out.println(room.getServiceName());
+        }
     }
 
     public List<Villa> getVillas() {
