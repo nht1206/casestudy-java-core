@@ -2,21 +2,22 @@ package Controllers;
 
 import Commons.ReadWriteCSV;
 import Models.*;
+import Services.CustomerServices;
+import Services.ResortServices;
 import Views.Menu;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainController {
     private Menu menu = new Menu();
-    private ServiceController serviceController;
-    private CustomerController customerController;
+    private ResortServices resortServices;
+    private CustomerServices customerServices;
     private Scanner scanner;
     private ReadWriteCSV readWriteCSV;
 
     public MainController() {
-        serviceController = new ServiceController();
-        customerController = new CustomerController();
+        resortServices = new ResortServices();
+        customerServices = new CustomerServices();
         readWriteCSV = new ReadWriteCSV();
         scanner = new Scanner(System.in);
     }
@@ -33,24 +34,36 @@ public class MainController {
                 break;
             }
             case 3: {
-                customerController.addNewCustomers();
+                customerServices.addNewCustomers();
                 displayMainMenu();
                 break;
             }
             case 4: {
-                customerController.showInfoCustomer();
+                customerServices.showInfoCustomer();
                 displayMainMenu();
                 break;
             }
             case 5: {
                 addNewBooking();
+                displayMainMenu();
                 break;
             }
             case 6: {
                 showInfoEmployee();
+                displayMainMenu();
                 break;
             }
             case 7: {
+                bookCinemaTicket();
+                displayMainMenu();
+                break;
+            }
+            case 8: {
+                showBookingCinemaTicket();
+                displayMainMenu();
+                break;
+            }
+            case 9: {
                 System.exit(0);
             }
             default: {
@@ -60,36 +73,42 @@ public class MainController {
         }
     }
 
+    private void showBookingCinemaTicket() {
+    }
+
+    private void bookCinemaTicket() {
+    }
+
     private void showServices() {
         int choice = menu.displayShowingServiceMenu();
         switch (choice) {
             case 1: {
-                serviceController.showVillaService();
+                resortServices.showVillaService();
                 showServices();
                 break;
             }
             case 2: {
-                serviceController.showHouseService();
+                resortServices.showHouseService();
                 showServices();
                 break;
             }
             case 3: {
-                serviceController.showRoomService();
+                resortServices.showRoomService();
                 showServices();
                 break;
             }
             case 4: {
-                serviceController.showAllNameVillaNotDuplicate();
+                resortServices.showAllNameVillaNotDuplicate();
                 showServices();
                 break;
             }
             case 5: {
-                serviceController.showAllNameHouseNotDuplicate();
+                resortServices.showAllNameHouseNotDuplicate();
                 showServices();
                 break;
             }
             case 6: {
-                serviceController.showAllNameRoomNotDuplicate();
+                resortServices.showAllNameRoomNotDuplicate();
                 showServices();
                 break;
             }
@@ -110,14 +129,14 @@ public class MainController {
 
 
     private void addNewBooking() {
-        List<Customer> listCustomers = customerController.getCustomers();
+        List<Models.Customer> listCustomers = customerServices.getCustomers();
         int choice;
         System.out.println("Choose the customer: ");
-        for (Customer customer : listCustomers) {
+        for (Models.Customer customer : listCustomers) {
             System.out.println(listCustomers.indexOf(customer) + ": " + customer.getNameCustomer());
         }
         choice = scanner.nextInt();
-        Customer selectedCustomer = null;
+        Models.Customer selectedCustomer = null;
         if (choice >= listCustomers.size()) {
             System.out.println("out of size.");
             addNewBooking();
@@ -125,10 +144,10 @@ public class MainController {
             selectedCustomer = listCustomers.get(choice);
         }
         choice = menu.displayBookingMenu();
-        Service selectedService = null;
+        Models.Service selectedService = null;
         switch (choice) {
             case 1:
-                List<Villa> villas = serviceController.getVillas();
+                List<Villa> villas = resortServices.getVillas();
                 if (villas.size() == 0) {
                     System.out.println("List villa is empty.");
                     addNewBooking();
@@ -145,7 +164,7 @@ public class MainController {
                 }
                 break;
             case 2:
-                List<House> houses = serviceController.getHouses();
+                List<House> houses = resortServices.getHouses();
                 if (houses.size() == 0) {
                     System.out.println("List house is empty.");
                     addNewBooking();
@@ -162,7 +181,7 @@ public class MainController {
                 }
                 break;
             case 3:
-                List<Room> rooms = serviceController.getRooms();
+                List<Room> rooms = resortServices.getRooms();
                 if (rooms.size() == 0) {
                     System.out.println("List room is empty.");
                     addNewBooking();
@@ -194,23 +213,28 @@ public class MainController {
     }
 
     private void showInfoEmployee() {
+        Map<String, Employee> employeeMap = readWriteCSV.readFileEmployeeCSV();
+        for (Map.Entry<String, Employee> entry : employeeMap.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue().toString());
+            System.out.println("------------------------------------------------");
+        }
     }
 
     private void addNewServices() {
         int choice = menu.displayAddingServiceMenu();
         switch (choice) {
             case 1: {
-                serviceController.addListVillaService();
+                resortServices.addListVillaService();
                 addNewServices();
                 break;
             }
             case 2: {
-                serviceController.addListHouseService();
+                resortServices.addListHouseService();
                 addNewServices();
                 break;
             }
             case 3: {
-                serviceController.addListRoomService();
+                resortServices.addListRoomService();
                 addNewServices();
                 break;
             }

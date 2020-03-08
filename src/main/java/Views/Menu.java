@@ -18,7 +18,9 @@ public class Menu {
                 "4. Show Information Customer\n" +
                 "5. Add New Booking Resort\n" +
                 "6. Show Information Employee\n" +
-                "7. Exit");
+                "7. Booking the cinema ticket.\n" +
+                "8. Show booking the cinema ticket. \n" +
+                "9. Exit");
         System.out.print("Enter your choice: ");
         choice = scanner.nextInt();
         return choice;

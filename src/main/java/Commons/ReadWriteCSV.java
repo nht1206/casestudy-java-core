@@ -13,10 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ReadWriteCSV {
     CSVWriter writer = null;
@@ -29,11 +26,14 @@ public class ReadWriteCSV {
     private static final String PATH_FILE_ROOM = "src/main/java/Data/Room.csv";
     private static final String PATH_FILE_BOOKING = "src/main/java/Data/Booking.csv";
     private static final String PATH_FILE_CUSTOMER = "src/main/java/Data/Customer.csv";
+    private static final String PATH_FILE_EMPLOYEE = "src/main/java/Data/Employee.csv";
+
     private static final String[] FILE_HEADER_OF_VILLA = {"id", "serviceName", "usableArea", "rentalCosts", "maxNumberOfPeople", "typeOfRent", "roomStandard", "descriptionOfAmenities", "areaOfPool", "numberOfFloors"};
     private static final String[] FILE_HEADER_OF_HOUSE = {"id", "serviceName", "usableArea", "rentalCosts", "maxNumberOfPeople", "typeOfRent", "roomStandard", "descriptionOfAmenities", "numberOfFloors"};
     private static final String[] FILE_HEADER_OF_ROOM = {"id", "serviceName", "usableArea", "rentalCosts", "maxNumberOfPeople", "typeOfRent", "freeServiceAccompany"};
     private static final String[] FILE_HEADER_OF_CUSTOMER = {"id", "nameCustomer", "idCard", "birthday", "gender", "phoneNumber", "email", "typeCustomer", "address"};
     private static final String[] FILE_HEADER_OF_BOOKING = {"idCustomer", "customerName", "idService", "serviceName"};
+    private static final String[] FILE_HEADER_OF_EMPLOYEE = {"name", "age", "address"};
 
 
     public void writeVillaToCSVFile(List<Villa> listVillas) {
@@ -327,5 +327,34 @@ public class ReadWriteCSV {
         }
         assert csvToBean != null;
         return csvToBean.parse();
+    }
+    public Map<String, Employee> readFileEmployeeCSV() {
+        Map<String, String> mapping = new HashMap<>();
+        for (String s : FILE_HEADER_OF_EMPLOYEE) {
+            mapping.put(s, s);
+        }
+        HeaderColumnNameTranslateMappingStrategy<Employee> strategy = new HeaderColumnNameTranslateMappingStrategy<>();
+        strategy.setType(Employee.class);
+        strategy.setColumnMapping(mapping);
+        CsvToBean<Employee> csvToBean = null;
+        try {
+            CSVReader csvReader = new CSVReader(new FileReader(PATH_FILE_EMPLOYEE));
+            csvToBean = new CsvToBeanBuilder<Employee>(csvReader)
+                    .withMappingStrategy(strategy)
+                    .withSeparator(COMMA_DELIMITER)
+                    .withQuoteChar(DEFAULT_QUOTE)
+                    .withSkipLines(NUM_OF_LINE_SKIP)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        assert csvToBean != null;
+        Map<String, Employee> employeeMap = new HashMap<>();
+        List<Employee> employees = csvToBean.parse();
+        for (Employee employee : employees) {
+            employeeMap.put(UUID.randomUUID().toString().replace("-", ""), employee);
+        }
+        return employeeMap;
     }
 }

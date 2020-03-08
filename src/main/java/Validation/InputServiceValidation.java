@@ -56,7 +56,7 @@ public class InputServiceValidation {
                 if (area > 30) {
                     return area;
                 } else {
-                    System.out.println("Usable area must be more 30. ");
+                    System.out.println("Usable area must be greater 30. ");
                 }
             } catch (Exception e) {
                 System.out.println("The type of value is wrong.");
@@ -72,7 +72,7 @@ public class InputServiceValidation {
                 if (area > 30) {
                     return area;
                 } else {
-                    System.out.println("Pool area must be more than 30. ");
+                    System.out.println("Pool area must be greater than 30. ");
                 }
             } catch (Exception e) {
                 System.out.println("The type of value is wrong.");
@@ -104,7 +104,7 @@ public class InputServiceValidation {
                 if (maxNumberOfPeople > 0 && maxNumberOfPeople < 20) {
                     return maxNumberOfPeople;
                 } else {
-                    System.out.println("Max Number Of People must be more than 0 and less than 20!");
+                    System.out.println("Max Number Of People must be greater than 0 and less than 20!");
                 }
             } catch (Exception e) {
                 System.out.println("The type of value is wrong.");
@@ -143,7 +143,7 @@ public class InputServiceValidation {
                 if (date.getYear() - new Integer(temp.toString()) >= 18) {
                     return birthday;
                 } else {
-                    System.out.println("Your age must be more then 18: ");
+                    System.out.println("Your age must be greater then 18: ");
                 }
 
             } else {

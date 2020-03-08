@@ -1,4 +1,4 @@
-package Controllers;
+package Services;
 
 import Commons.ReadWriteCSV;
 import Models.House;
@@ -8,7 +8,7 @@ import Validation.InputServiceValidation;
 
 import java.util.*;
 
-public class ServiceController {
+public class ResortServices {
     private Scanner scanner;
     private ReadWriteCSV readWriteCSV;
     private InputServiceValidation inputValidation;
@@ -16,7 +16,7 @@ public class ServiceController {
     private List<House> houses;
     private List<Room> rooms;
 
-    public ServiceController() {
+    public ResortServices() {
         readWriteCSV = new ReadWriteCSV();
         inputValidation = new InputServiceValidation();
         villas = readWriteCSV.readFileVillaCSV();
@@ -133,7 +133,8 @@ public class ServiceController {
     }
 
     public void showAllNameRoomNotDuplicate() {
-        Set<Room> roomTreeSet = new TreeSet<>(rooms);
+        Set<Room> roomTreeSet = new TreeSet<>();
+        roomTreeSet.addAll(rooms);
         for (Room room : roomTreeSet) {
             System.out.println("--------------------------------------------------");
             System.out.println(room.getServiceName());

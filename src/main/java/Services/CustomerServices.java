@@ -1,4 +1,4 @@
-package Controllers;
+package Services;
 
 import Commons.ReadWriteCSV;
 import InputCustomerException.*;
@@ -8,13 +8,13 @@ import Validation.InputCustomerValidation;
 
 import java.util.*;
 
-public class CustomerController {
+public class CustomerServices {
     private ReadWriteCSV readWriteCSV;
-    List<Customer> customers;
+    List<Models.Customer> customers;
     private InputCustomerValidation inputCustomerValidation;
 
 
-    public CustomerController() {
+    public CustomerServices() {
         readWriteCSV = new ReadWriteCSV();
         inputCustomerValidation = new InputCustomerValidation();
         customers = readWriteCSV.readFileCustomerCSV();
@@ -26,7 +26,7 @@ public class CustomerController {
         int length = scanner.nextInt();
         scanner.nextLine();
         for (int i = 0; i < length; i++) {
-            Customer customer = new Customer();
+            Models.Customer customer = new Models.Customer();
             customer.setId(UUID.randomUUID().toString().replace("-", ""));
             while (true) {
                 try {
@@ -82,12 +82,12 @@ public class CustomerController {
     public void showInfoCustomer() {
         Collections.sort(customers);
         System.out.println("--------------------------------------------------");
-        for (Customer customer : customers) {
+        for (Models.Customer customer : customers) {
             System.out.println(customer.showInfo());
         }
     }
 
-    public List<Customer> getCustomers() {
+    public List<Models.Customer> getCustomers() {
         return customers;
     }
 }
