@@ -353,7 +353,7 @@ public class ReadWriteCSV {
         Map<String, Employee> employeeMap = new HashMap<>();
         List<Employee> employees = csvToBean.parse();
         for (Employee employee : employees) {
-            employeeMap.put(UUID.randomUUID().toString().replace("-", ""), employee);
+            employeeMap.put("00" + employees.indexOf(employee), employee);
         }
         return employeeMap;
     }

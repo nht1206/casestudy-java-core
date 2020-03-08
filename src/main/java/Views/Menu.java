@@ -7,7 +7,6 @@ public class Menu {
 
     public Menu() {
         this.scanner = new Scanner(System.in);
-
     }
 
     public int displayMainMenu() {
@@ -20,11 +19,13 @@ public class Menu {
                 "6. Show Information Employee\n" +
                 "7. Booking the cinema ticket.\n" +
                 "8. Show booking the cinema ticket. \n" +
-                "9. Exit");
+                "9. Find employee. \n" +
+                "10. Exit");
         System.out.print("Enter your choice: ");
         choice = scanner.nextInt();
         return choice;
     }
+
     public int displayAddingServiceMenu() {
         int choice;
         System.out.println("1. Add New Villa\n" +
@@ -36,6 +37,7 @@ public class Menu {
         choice = scanner.nextInt();
         return choice;
     }
+
     public int displayShowingServiceMenu() {
         int choice;
         System.out.println("1. Show All Villa\n" +
@@ -50,6 +52,7 @@ public class Menu {
         choice = scanner.nextInt();
         return choice;
     }
+
     public int displayBookingMenu() {
         int choice;
         System.out.println("1. Booking Villa\n" +

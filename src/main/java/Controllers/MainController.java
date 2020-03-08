@@ -2,7 +2,9 @@ package Controllers;
 
 import Commons.ReadWriteCSV;
 import Models.*;
+import Services.CinemaServices;
 import Services.CustomerServices;
+import Services.FileCabinetServices;
 import Services.ResortServices;
 import Views.Menu;
 
@@ -14,12 +16,16 @@ public class MainController {
     private CustomerServices customerServices;
     private Scanner scanner;
     private ReadWriteCSV readWriteCSV;
+    private CinemaServices cinemaServices;
+    private FileCabinetServices fileCabinetServices;
 
     public MainController() {
         resortServices = new ResortServices();
         customerServices = new CustomerServices();
         readWriteCSV = new ReadWriteCSV();
         scanner = new Scanner(System.in);
+        cinemaServices = new CinemaServices();
+        fileCabinetServices = new FileCabinetServices();
     }
 
     public void displayMainMenu() {
@@ -64,6 +70,11 @@ public class MainController {
                 break;
             }
             case 9: {
+                findEmployee();
+                displayMainMenu();
+                break;
+            }
+            case 10: {
                 System.exit(0);
             }
             default: {
@@ -73,10 +84,56 @@ public class MainController {
         }
     }
 
+    private void findEmployee() {
+        scanner = new Scanner(System.in);
+        System.out.print("Enter id of Employee: ");
+        String idEmployee = scanner.nextLine();
+        Employee employee = fileCabinetServices.findEmployeeById(idEmployee);
+        if (employee == null) {
+            System.out.println("Not found Filing Cabinets!");
+        } else {
+            System.out.println("----------------------------------------------------------------");
+            System.out.println(employee);
+            System.out.println("----------------------------------------------------------------");
+        }
+    }
+
     private void showBookingCinemaTicket() {
+        Queue<Customer> customers = cinemaServices.getAllBookingCinema();
+        while (true) {
+            Customer customer = customers.poll();
+            if (customer == null) {
+                break;
+            }
+            System.out.println(customer.showInfo());
+        }
     }
 
     private void bookCinemaTicket() {
+        List<Models.Customer> listCustomers = customerServices.getCustomers();
+        scanner = new Scanner(System.in);
+        System.out.println("Enter number ticket: ");
+        int numberOfTicket = scanner.nextInt();
+        while (numberOfTicket < 1) {
+            System.out.println("Số lượng vé phải là số dương");
+        }
+        int choice;
+        for (int i = 0; i < numberOfTicket; i++) {
+            System.out.println("Choose the customer: ");
+            for (Models.Customer customer : listCustomers) {
+                System.out.println(listCustomers.indexOf(customer) + ": " + customer.getNameCustomer());
+            }
+            choice = scanner.nextInt();
+            Models.Customer selectedCustomer;
+            if (choice >= listCustomers.size()) {
+                System.out.println("out of size.");
+                i--;
+
+            } else {
+                selectedCustomer = listCustomers.get(choice);
+                cinemaServices.addBookingCinema(selectedCustomer);
+            }
+        }
     }
 
     private void showServices() {
@@ -205,6 +262,7 @@ public class MainController {
         Booking newBooking = new Booking();
         newBooking.setIdCustomer(selectedCustomer.getId());
         newBooking.setCustomerName(selectedCustomer.getNameCustomer());
+        assert selectedService != null;
         newBooking.setIdService(selectedService.getId());
         newBooking.setServiceName(selectedService.getServiceName());
         bookings.add(newBooking);
